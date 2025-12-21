@@ -1,0 +1,92 @@
+<!--
+TEMPLATE FOR CREATING NEW EMAIL SIGNATURES
+===========================================
+
+INSTRUCTIONS:
+1. Copy this template file and rename it to the person's first name (e.g., "john.html")
+2. Place the new HTML file in the "active/" folder
+3. Add the person's profile image (PNG format) to the "active/" folder with the same name (e.g., "john.png")
+4. Update the following sections in the HTML:
+   - Profile image src and alt text (line 5)
+   - Name (line 10)
+   - Title/Position (line 11)
+   - Profile image filename in src attribute should match the PNG filename
+
+IMPORTANT NOTES:
+- Profile images should be 120px wide (height will auto-adjust)
+- Company logos and banners are shared assets in the root directory
+- Image paths use "../" to reference root directory assets
+- Profile images are in the same folder (active/) so they use relative paths without "../"
+- Contact information (phone numbers and addresses) is already set correctly
+- Do NOT modify the company logos section or contact information unless specifically requested
+
+EXAMPLE:
+If creating a signature for "John Doe" with title "Software Developer":
+- File: active/john.html
+- Image: active/john.png
+- Line 5: <img src="john.png" alt="John Doe" ...>
+- Line 10: <strong>John Doe</strong>
+- Line 11: <span>Software Developer</span>
+
+After creating the signature, update index.html to add a link to the new signature.
+-->
+
+<table cellpadding="0" cellspacing="0" style="font-family: Verdana, sans-serif; width: 800px; max-width: 100%;">
+    <tr>
+        <!-- Profile Image -->
+        <!-- TODO: Update src to match the person's PNG filename (e.g., "john.png") -->
+        <!-- TODO: Update alt text to the person's full name -->
+        <td style="vertical-align: top; padding-right: 15px; width: 120px; max-width: 120px;">
+            <img src="PROFILE_IMAGE.png" alt="Full Name" style="width: 120px; height: auto; display: block;">
+        </td>
+        <!-- Right Content (Name, Title, Logos, Contact Info) -->
+        <td>
+            <!-- Name and Title -->
+            <!-- TODO: Update with the person's full name -->
+            <strong style="font-size: 16px; display: block; margin-bottom: 2px; color: #000000;">Full Name</strong>
+            <!-- TODO: Update with the person's job title/position -->
+            <span style="font-size: 14px; display: block; margin-bottom: 10px; color: #000000;">Job Title / Position</span>
+            
+            <!-- Company Logos -->
+            <!-- DO NOT MODIFY: Company logos are shared assets -->
+            <div style="margin-bottom: 15px; margin-top: 15px;">
+                <a href="https://theleapers.co" target="_blank"><img src="../leapers.png" alt="The Leapers" style="height: 25px; margin-right: 40px;"></a><a href="https://tezgahcilar.com" target="_blank"><img src="../tezgah.png" alt="Tezgah&ccedil;&imath;lar" style="height: 30px; margin-right: 35px;"></a><a href="https://thinkoutsidethebox.io" target="_blank"><img src="../totb.png" alt="Think Outside The Box" style="height: 30px; margin-right: 35px;"></a><a href="https://kataloq.co" target="_blank"><img src="../KATALOQ.png" alt="KATALOQ" style="height: 15px; padding-bottom: 5px;"></a>
+            </div>
+            
+            <!-- Contact Information -->
+            <!-- DO NOT MODIFY: Contact information is standardized -->
+            <table cellpadding="0" cellspacing="0" style="font-size: 12px; width: 100%;">
+                <tr>
+                    <td style="vertical-align: top; color: #000000;">
+                        &#128222; <span style="color: #000000;">+44 (20) 8720 9257</span><br>
+                        &#128205; <span style="color: #000000;">22 Highbury Grove, London, United Kingdom, N5 2ER</span>
+                        <br/>
+                        <b style="color: #000000;">London, United Kingdom</b>
+                    </td>
+                    <td style="padding-left: 10px; vertical-align: top; color: #000000;">
+                        &#128222; <span style="color: #000000;">+90 (850) 303 02 18</span><br>
+                        &#128205; <span style="color: #000000;">Medeniyet &Uuml;niversitesi Teknopark. Akf&imath;rat Mahallesi Fatih Sultan Mehmet Bulvar&imath; No 3 Daire 53 Tuzla 34959</span>
+                        <br/>
+                        <b style="color: #000000;">&Idot;stanbul, Turkey</b>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- Banners Side by Side -->
+    <!-- DO NOT MODIFY: Banners are shared assets -->
+    <tr>
+        <td colspan="2" style="padding-top: 10px;">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; padding-right: 5px;">
+                        <img src="../banner1.png" alt="Sale Banner" style="width: 100%; height: auto;">
+                    </td>
+                    <td style="width: 50%; padding-left: 5px;">
+                        <img src="../banner2.png" alt="Summer Banner" style="width: 100%; height: auto;">
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
