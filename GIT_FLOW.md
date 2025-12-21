@@ -1,5 +1,7 @@
 # Git Flow Guide
 
+**⚠️ CRITICAL: Always work on the `develop` branch. Never commit directly to `main`.**
+
 This repository follows a simplified Git Flow workflow with two main branches: `main` and `develop`.
 
 ## Branch Overview
@@ -7,19 +9,31 @@ This repository follows a simplified Git Flow workflow with two main branches: `
 ### `main` Branch
 - **Purpose**: Production-ready code
 - **Deployment**: Automatically deployed to GitHub Pages
-- **Protection**: Should only receive code via merges from `develop`
+- **Protection**: **NEVER commit directly to this branch**
+- **Updates**: Only receives code via merges from `develop`
 - **Status**: Always stable and ready for production
 
 ### `develop` Branch
 - **Purpose**: Development and testing
-- **Usage**: Where all new signatures and changes are developed
+- **Usage**: **This is where ALL development work happens**
+- **Workflow**: All new signatures, updates, and changes are made here first
 - **Merging**: Changes are merged to `main` when ready for production
+- **Sync**: Should be kept in sync with `main` (merge `main` into `develop` regularly)
 
 ## Workflow
 
+### ⚠️ Always Start on Develop Branch
+
+**Before starting any work, always ensure you're on the develop branch:**
+
+```bash
+git checkout develop
+git pull origin develop
+```
+
 ### Creating a New Signature
 
-1. **Switch to develop branch**
+1. **Switch to develop branch** (if not already there)
    ```bash
    git checkout develop
    git pull origin develop

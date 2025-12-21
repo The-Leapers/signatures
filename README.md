@@ -38,17 +38,28 @@ View all active signatures:
 
 ## Creating a New Signature
 
-1. Copy `template.html` to create a new signature file
-2. Rename the file to the person's first name (e.g., `john.html`)
-3. Place the file in the `active/` folder
-4. Add the person's profile image (PNG format, 120px wide) to the `active/` folder with the same name (e.g., `john.png`)
-5. Update the template with:
+**⚠️ IMPORTANT: Always work on the `develop` branch for all development work.**
+
+1. **Switch to develop branch**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   ```
+
+2. Copy `template.html` to create a new signature file
+3. Rename the file to the person's first name (e.g., `john.html`)
+4. Place the file in the `active/` folder
+5. Add the person's profile image (PNG format, 120px wide) to the `active/` folder with the same name (e.g., `john.png`)
+6. Update the template with:
    - Profile image filename in the `src` attribute
    - Person's full name (in both the image `alt` text and the name field)
    - Person's job title/position
-6. Update `index.html` to add a link to the new signature
+7. Update `index.html` to add a link to the new signature
+8. Commit and push to `develop` branch
+9. After testing, merge `develop` to `main` to deploy to GitHub Pages
 
 See `template.html` for detailed inline instructions and TODO comments.
+See `GIT_FLOW.md` for complete workflow instructions.
 
 ## Usage
 
@@ -63,10 +74,16 @@ This repository is configured to be hosted on GitHub Pages. The site is automati
 
 ## Git Workflow
 
+**⚠️ IMPORTANT: All development work must be done on the `develop` branch. Never commit directly to `main`.**
+
 This repository uses Git Flow for managing changes:
 
 - `main`: Production branch - contains stable, production-ready signatures (deployed to GitHub Pages)
-- `develop`: Development branch - used for testing and preparing new signatures
+  - **Only receives code via merges from `develop`**
+  - **Never commit directly to this branch**
+- `develop`: Development branch - used for all new signatures, updates, and testing
+  - **This is where all development work happens**
+  - **Always start here when creating or updating signatures**
 
 See `GIT_FLOW.md` for detailed workflow instructions.
 
