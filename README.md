@@ -76,16 +76,25 @@ This repository is configured to be hosted on GitHub Pages. The site is automati
 
 **⚠️ IMPORTANT: All development work must be done on the `develop` branch. Never commit directly to `main`.**
 
-This repository uses Git Flow for managing changes:
+This repository uses Git Flow with Pull Requests for managing changes:
 
 - `main`: Production branch - contains stable, production-ready signatures (deployed to GitHub Pages)
-  - **Only receives code via merges from `develop`**
+  - **Only receives code via Pull Requests from `develop`**
   - **Never commit directly to this branch**
+  - **Protected branch - requires Pull Request for all changes**
 - `develop`: Development branch - used for all new signatures, updates, and testing
   - **This is where all development work happens**
   - **Always start here when creating or updating signatures**
+  - **Changes are merged to `main` via Pull Requests**
 
-See `GIT_FLOW.md` for detailed workflow instructions.
+**Workflow:**
+1. Make changes on `develop` branch
+2. Test and commit changes
+3. Create a Pull Request from `develop` to `main`
+4. Review and merge the Pull Request
+5. GitHub Pages automatically deploys from `main`
+
+See `GIT_FLOW.md` for detailed workflow instructions including how to create Pull Requests.
 
 ## Branches
 

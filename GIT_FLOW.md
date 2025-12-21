@@ -10,8 +10,9 @@ This repository follows a simplified Git Flow workflow with two main branches: `
 - **Purpose**: Production-ready code
 - **Deployment**: Automatically deployed to GitHub Pages
 - **Protection**: **NEVER commit directly to this branch**
-- **Updates**: Only receives code via merges from `develop`
+- **Updates**: Only receives code via **Pull Requests** from `develop`
 - **Status**: Always stable and ready for production
+- **Branch Protection**: Should be configured to require pull requests (see setup below)
 
 ### `develop` Branch
 - **Purpose**: Development and testing
@@ -69,27 +70,60 @@ git pull origin develop
    - Check that all images load properly
    - Test the link in `index.html`
 
-### Deploying to Production
+### Deploying to Production (Using Pull Requests)
 
-1. **Merge develop to main**
+**⚠️ IMPORTANT: Always use Pull Requests to merge `develop` into `main`. Never merge directly.**
+
+1. **Ensure all changes are pushed to develop**
    ```bash
-   git checkout main
-   git pull origin main
-   git merge develop
-   git push origin main
+   git checkout develop
+   git push origin develop
    ```
 
-2. **GitHub Pages will automatically rebuild**
-   - Wait 1-2 minutes
+2. **Create a Pull Request on GitHub**
+   - Go to: https://github.com/The-Leapers/signatures
+   - Click the **"Pull requests"** tab
+   - Click **"New pull request"**
+   - Set **base branch**: `main`
+   - Set **compare branch**: `develop`
+   - Click **"Create pull request"**
+
+3. **Fill out the Pull Request**
+   - **Title**: Descriptive title (e.g., "Deploy new signatures to production")
+   - **Description**: List what's being deployed:
+     - New signatures added
+     - Updates made
+     - Any other changes
+   - Add reviewers if needed
+   - Click **"Create pull request"**
+
+4. **Review and Merge**
+   - Reviewers can review the changes
+   - Check that all signatures display correctly
+   - Once approved, click **"Merge pull request"**
+   - Choose merge type (usually "Create a merge commit")
+   - Click **"Confirm merge"**
+
+5. **GitHub Pages will automatically rebuild**
+   - Wait 1-2 minutes after merge
    - Visit https://the-leapers.github.io/signatures/
    - Verify the changes are live
 
-3. **Update develop** (if needed)
+6. **Update develop** (sync with main)
    ```bash
    git checkout develop
-   git merge main  # Sync any hotfixes
+   git pull origin develop
+   git merge main  # Sync any changes from main
    git push origin develop
    ```
+
+### Alternative: Using GitHub CLI
+
+If you have GitHub CLI installed, you can create a PR from the command line:
+
+```bash
+gh pr create --base main --head develop --title "Deploy to production" --body "Description of changes"
+```
 
 ## Common Tasks
 
@@ -109,7 +143,7 @@ git pull origin develop
    git push origin develop
    ```
 
-4. Test, then merge to main when ready
+4. Test on develop, then create a Pull Request to merge to main when ready
 
 ### Archiving a Signature
 
@@ -138,22 +172,26 @@ If you need to fix something directly in production:
    ```bash
    git add .
    git commit -m "Hotfix: [description]"
+   git push origin hotfix/description
    ```
 
-3. **Merge to main and develop**
+3. **Create Pull Request for hotfix**
+   - Go to GitHub and create a PR from `hotfix/description` to `main`
+   - Mark it as urgent/hotfix in the description
+   - Get quick approval and merge
+
+4. **Merge hotfix to develop**
    ```bash
-   git checkout main
-   git merge hotfix/description
-   git push origin main
-   
    git checkout develop
+   git pull origin develop
    git merge hotfix/description
    git push origin develop
    ```
 
-4. **Delete hotfix branch**
+5. **Delete hotfix branch**
    ```bash
    git branch -d hotfix/description
+   git push origin --delete hotfix/description
    ```
 
 ## Best Practices
@@ -176,9 +214,10 @@ If you need to fix something directly in production:
    - One signature per commit when possible
    - Separate commits for different types of changes
 
-5. **Regular merges**
-   - Merge develop to main regularly (weekly or after each signature)
+5. **Regular Pull Requests**
+   - Create PRs from develop to main regularly (weekly or after each signature)
    - Don't let develop get too far ahead of main
+   - Always use Pull Requests, never merge directly to main
 
 ## Troubleshooting
 
@@ -214,6 +253,35 @@ git reset --hard HEAD~1  # Undo commit and discard changes
 - Create a new commit to fix the issue
 - Or use `git revert` to create a commit that undoes previous changes
 
+## Setting Up Branch Protection (Repository Administrators)
+
+To enforce the Pull Request workflow, set up branch protection rules for `main`:
+
+1. **Go to Repository Settings**
+   - Navigate to: https://github.com/The-Leapers/signatures/settings
+   - Click **"Branches"** in the left sidebar
+
+2. **Add Branch Protection Rule**
+   - Click **"Add branch protection rule"**
+   - Under **"Branch name pattern"**, enter: `main`
+   - Enable the following options:
+     - ✅ **Require a pull request before merging**
+       - ✅ Require approvals (optional, set number if desired)
+       - ✅ Dismiss stale pull request approvals when new commits are pushed
+     - ✅ **Require status checks to pass before merging** (optional)
+     - ✅ **Require branches to be up to date before merging**
+     - ✅ **Do not allow bypassing the above settings** (recommended)
+     - ✅ **Restrict who can push to matching branches** (optional, for extra security)
+
+3. **Save the Rule**
+   - Click **"Create"** or **"Save changes"**
+
+This ensures that:
+- No one can push directly to `main`
+- All changes must go through Pull Requests
+- Code can be reviewed before merging
+- The production branch stays stable
+
 ## Quick Reference
 
 ```bash
@@ -230,10 +298,8 @@ git pull origin [branch-name]
 # Push changes
 git push origin [branch-name]
 
-# Merge develop into main
-git checkout main
-git merge develop
-git push origin main
+# Create Pull Request (use GitHub web interface or CLI)
+# Never merge directly to main - always use Pull Requests
 
 # View branch status
 git branch -a
