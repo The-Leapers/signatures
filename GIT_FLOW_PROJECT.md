@@ -9,7 +9,7 @@ This is a project-specific Git Flow guide for the Email Signatures repository. F
 - **Repository**: Email signatures for The Leapers team
 - **Deployment**: GitHub Pages (https://the-leapers.github.io/signatures/)
 - **Branch Strategy**: Simplified Git Flow (main + develop)
-- **Versioning**: Date-based (YYYY.MM.DD) or simple incremental (v1, v2, etc.)
+- **Versioning**: Semantic versioning (v1.0.0, v1.1.0, v2.0.0)
 
 ## Quick Start
 
@@ -284,8 +284,8 @@ Before creating a Pull Request to `main`, verify:
    ```bash
    git checkout main
    git pull origin main
-   git tag -a v2024.04.15 -m "Release: Add signatures for [names]"
-   git push origin v2024.04.15
+   git tag -a v1.1.0 -m "Release v1.1.0: Add signatures for [names]"
+   git push origin v1.1.0
    ```
 
 6. **Verify Deployment**
@@ -304,9 +304,12 @@ Before creating a Pull Request to `main`, verify:
 
 ## Versioning Strategy
 
-For this project, we use **date-based versioning**:
+For this project, we use **semantic versioning**:
 
-- **Format**: `vYYYY.MM.DD` (e.g., `v2024.04.15`)
+- **Format**: `vMAJOR.MINOR.PATCH` (e.g., `v1.0.0`, `v1.1.0`, `v2.0.0`)
+- **MAJOR**: Breaking changes or major updates (rare)
+- **MINOR**: New signatures added, new features
+- **PATCH**: Bug fixes, updates to existing signatures
 - **When to tag**: After each merge to main
 - **Tag message**: Brief description of what's in the release
 
@@ -317,12 +320,18 @@ For this project, we use **date-based versioning**:
 git checkout main
 git pull origin main
 
-# Create tag
-git tag -a v2024.04.15 -m "Release: Add signatures for John and Jane"
+# Create tag (increment version appropriately)
+git tag -a v1.1.0 -m "Release v1.1.0: Add signatures for John and Jane"
 
 # Push tag
-git push origin v2024.04.15
+git push origin v1.1.0
 ```
+
+### Version Increment Guidelines
+
+- **v1.0.0 → v1.1.0**: Adding new signatures, new features
+- **v1.1.0 → v1.1.1**: Fixing bugs, updating existing signatures
+- **v1.1.0 → v2.0.0**: Major structural changes, breaking changes
 
 ### Viewing Release History
 
@@ -331,10 +340,10 @@ git push origin v2024.04.15
 git tag
 
 # View specific release
-git show v2024.04.15
+git show v1.1.0
 
-# View release notes
-git log --oneline v2023.01.01..v2024.04.15
+# View release notes between versions
+git log --oneline v1.0.0..v1.1.0
 ```
 
 ## Hotfix Workflow
@@ -366,8 +375,8 @@ If a critical issue is found in production:
    ```bash
    git checkout main
    git pull origin main
-   git tag -a v2024.04.15.1 -m "Hotfix: Fix broken image in signature"
-   git push origin v2024.04.15.1
+   git tag -a v1.0.1 -m "Hotfix v1.0.1: Fix broken image in signature"
+   git push origin v1.0.1
    ```
 
 6. **Merge to develop**
@@ -396,8 +405,8 @@ If a deployment causes issues:
 
 2. **Tag the rollback**
    ```bash
-   git tag -a v2024.04.15.rollback -m "Rollback: Revert problematic changes"
-   git push origin v2024.04.15.rollback
+   git tag -a v1.0.1 -m "Rollback v1.0.1: Revert problematic changes from v1.1.0"
+   git push origin v1.0.1
    ```
 
 3. **Fix issues on develop**
@@ -508,8 +517,8 @@ gh pr create --base main --head develop --title "Deploy signatures"
 # After PR merged, tag release
 git checkout main
 git pull origin main
-git tag -a v2024.04.15 -m "Release: [description]"
-git push origin v2024.04.15
+git tag -a v1.1.0 -m "Release v1.1.0: [description]"
+git push origin v1.1.0
 
 # Sync develop
 git checkout develop
@@ -518,7 +527,7 @@ git push origin develop
 
 # View tags
 git tag
-git show v2024.04.15
+git show v1.1.0
 ```
 
 ## Project Structure Reference
