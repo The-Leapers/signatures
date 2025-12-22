@@ -59,7 +59,8 @@ View all active signatures:
 9. After testing, merge `develop` to `main` to deploy to GitHub Pages
 
 See `template.html` for detailed inline instructions and TODO comments.
-See `GIT_FLOW.md` for complete workflow instructions.
+See `GIT_FLOW_PROJECT.md` for project-specific workflow instructions.
+See `GIT_FLOW.md` for general Git Flow concepts and advanced topics.
 
 ## Usage
 
@@ -94,7 +95,8 @@ This repository uses Git Flow with Pull Requests for managing changes:
 4. Review and merge the Pull Request
 5. GitHub Pages automatically deploys from `main`
 
-See `GIT_FLOW.md` for detailed workflow instructions including how to create Pull Requests.
+See `GIT_FLOW_PROJECT.md` for project-specific workflow instructions.
+See `GIT_FLOW.md` for general Git Flow concepts and advanced topics.
 
 ## Branches
 
