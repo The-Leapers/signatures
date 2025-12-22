@@ -31,7 +31,7 @@ This repository follows Git Flow workflow with two main branches: `main` and `de
 
 ### Release Branches
 - **Purpose**: Prepare for a new production release
-- **Naming**: `release/v1.0.0` or `release/YYYY-MM-DD`
+- **Naming**: `release/v1.0.0` (use semantic versioning)
 - **Source**: Created from `develop` when ready to release
 - **Destination**: Merged to both `main` (for release) and `develop` (to sync)
 - **Lifecycle**: Deleted after merging
@@ -52,12 +52,6 @@ Follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`
 - **MAJOR** (v1.0.0 → v2.0.0): Breaking changes, incompatible API changes
 - **MINOR** (v1.0.0 → v1.1.0): New features, backward-compatible
 - **PATCH** (v1.0.0 → v1.0.1): Bug fixes, backward-compatible
-
-### Alternative: Date-Based Versioning
-
-- Format: `YYYY.MM.DD` or `v2024.04.15`
-- Useful for projects with frequent releases
-- Less semantic but easier to track
 
 ### Tag Naming Convention
 
@@ -413,7 +407,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed bug in authentication
 
-## [1.0.0] - 2024-04-15
+## [1.0.0]
 
 ### Added
 - Initial release
@@ -431,8 +425,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 1. **Add entries under [Unreleased]** as you develop
 2. **When releasing**, move entries to new version section
-3. **Update date** in version header
-4. **Commit changelog** with release
+3. **Commit changelog** with release
 
 ### Release Notes in Pull Requests
 
