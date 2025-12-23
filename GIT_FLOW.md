@@ -32,9 +32,10 @@ This repository follows Git Flow workflow with two main branches: `main` and `de
 ### Release Branches
 - **Purpose**: Prepare for a new production release
 - **Naming**: `release/v1.0.0` (use semantic versioning)
-- **Source**: Created from `develop` when ready to release
-- **Destination**: Merged to both `main` (for release) and `develop` (to sync)
+- **Source**: Created from `develop` when ready to release (after features are merged)
+- **Destination**: Merged to both `main` (for release) and `develop` (to sync fixes back)
 - **Lifecycle**: Deleted after merging
+- **Important**: Features merge to `develop` first, then release branch is created FROM `develop`. Do not merge features into release branches.
 
 ### Hotfix Branches
 - **Purpose**: Fix critical production issues
@@ -87,6 +88,8 @@ git pull origin develop
 
 #### Creating a Feature Branch
 
+**⚠️ IMPORTANT: Feature branches always merge into `develop`, never into release branches. Release branches are created FROM `develop` after features are merged.**
+
 1. **Start from develop**
    ```bash
    git checkout develop
@@ -117,13 +120,15 @@ git pull origin develop
    git push origin feature/feature-name
    ```
 
-6. **Create Pull Request to develop**
+6. **Create Pull Request to develop** (NOT to release branches)
    - Go to GitHub repository
    - Click **"Pull requests"** → **"New pull request"**
    - Base: `develop` ← Compare: `feature/feature-name`
    - Fill out PR template (see below)
    - Request review
    - Merge after approval
+   
+   **Note**: Even if a release branch exists, merge features to `develop`. The release branch will be updated when it merges back to `develop`.
 
 7. **Delete feature branch** (after merge)
    ```bash
@@ -131,6 +136,44 @@ git pull origin develop
    git branch -d feature/feature-name
    git push origin --delete feature/feature-name
    ```
+
+### Understanding Branch Relationships
+
+#### Feature Branches → Develop → Release Branches
+
+**Feature branches ALWAYS merge into `develop`, never into release branches:**
+
+```
+feature/new-feature → develop → release/v1.0.0 → main
+```
+
+**Workflow:**
+1. Create feature branch from `develop`
+2. Develop and test feature
+3. Merge feature branch → `develop` (via Pull Request)
+4. When ready to release, create release branch FROM `develop`
+5. Release branch contains all features that were in `develop`
+6. Fix release-blocking bugs on release branch
+7. Merge release branch → `main` (for production)
+8. Merge release branch → `develop` (to sync fixes back)
+
+**During Release Branch Phase:**
+- ✅ New features continue to be merged to `develop` for the next release
+- ✅ Only release-blocking fixes go on the release branch
+- ❌ Do NOT merge new features into the release branch
+- ✅ The release branch is isolated for final testing and preparation
+
+#### Hotfixes Are Separate
+
+**Hotfixes come from `main`, not from release branches:**
+
+```
+main → hotfix/critical-bug → main + develop
+```
+
+- Hotfixes are created from `main` when production has a critical issue
+- They merge to both `main` (immediate fix) and `develop` (to prevent regression)
+- Hotfixes are independent of release branches
 
 ### Release Process
 
@@ -148,22 +191,28 @@ Before creating a release, ensure:
 
 #### Creating a Release Branch
 
+**⚠️ IMPORTANT: Release branches are created FROM `develop` after all features for the release have been merged. Feature branches merge into `develop`, NOT into release branches.**
+
 1. **Ensure develop is ready**
    ```bash
    git checkout develop
    git pull origin develop
    ```
+   
+   **Note**: At this point, `develop` should already contain all features that will be in this release. Feature branches merge to `develop` first, then you create the release branch from `develop`.
 
-2. **Create release branch**
+2. **Create release branch FROM develop**
    ```bash
    git checkout -b release/v1.0.0
    git push origin release/v1.0.0
    ```
+   
+   **What's in the release branch**: All features that were merged to `develop` are now in this release branch. The release branch is a snapshot of `develop` at this point.
 
 3. **Finalize release**
    - Update version numbers in code
    - Update CHANGELOG.md
-   - Fix any release-blocking bugs
+   - Fix any release-blocking bugs (commit directly to release branch)
    - Test thoroughly
    - Commit final changes
    ```bash
@@ -171,6 +220,12 @@ Before creating a release, ensure:
    git commit -m "Prepare release v1.0.0"
    git push origin release/v1.0.0
    ```
+   
+   **During release preparation**:
+   - ✅ Fix release-blocking bugs directly on the release branch
+   - ✅ Update version numbers and documentation
+   - ❌ Do NOT merge new features into the release branch
+   - ✅ New features continue to be merged to `develop` for the next release
 
 4. **Create Pull Request to main**
    - Base: `main` ← Compare: `release/v1.0.0`
