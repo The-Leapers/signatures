@@ -27,8 +27,6 @@ Phone: +90 (850) 303 02 18
 The following team members have active signatures:
 - Ayça Ceren Akdemir
 - Burçak Yıldırım Orhan
-- Deniz İpek Bardan
-- Semih Selçuklu
 - Arda Yiğithan Orhan
 
 View all active signatures:
