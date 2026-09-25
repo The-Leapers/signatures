@@ -18,8 +18,9 @@ Each team member has their own HTML signature file (e.g., `ayca.html`, `burcak.h
 22 Highbury Grove, London, United Kingdom, N5 2ER
 Phone: +44 (20) 8720 9257
 
-### İstanbul Office
-Medeniyet Üniversitesi Teknopark. Akfırat Mahallesi Fatih Sultan Mehmet Bulvarı No 3 Daire 53 Tuzla 34959
+### İstanbul Offices
+Nef 09 Hümeyra Sok. No:7 B Blok K:6 Ofis:129 Kağıthane 34400
+Medeniyet Üniversitesi Teknopark No 3 D:53 Tuzla 34959
 Phone: +90 (850) 303 02 18
 
 ## Active Signatures
